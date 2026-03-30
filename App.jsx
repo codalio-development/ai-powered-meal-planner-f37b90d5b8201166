@@ -10,8 +10,8 @@ import CurrentMealPlan from "./pages/CurrentMealPlan";
 import GenerateMealPlan from "./pages/GenerateMealPlan";
 import MealPlanHistory from "./pages/MealPlanHistory";
 import Explore from "./pages/Explore";
-import RecommendedRecipes from "./pages/RecommendedRecipes";
-import SearchRecipes from "./pages/SearchRecipes";
+import Recommended from "./pages/Recommended";
+import Search from "./pages/Search";
 import RecipeDetail from "./pages/RecipeDetail";
 import GroceryList from "./pages/GroceryList";
 import Preferences from "./pages/Preferences";
@@ -33,8 +33,8 @@ function App() {
       <Route path="/meal-plan/generate" element={<GenerateMealPlan />} />
       <Route path="/meal-plan/history" element={<MealPlanHistory />} />
       <Route path="/explore" element={<Explore />} />
-      <Route path="/explore/recommended" element={<RecommendedRecipes />} />
-      <Route path="/explore/search" element={<SearchRecipes />} />
+      <Route path="/explore/recommended" element={<Recommended />} />
+      <Route path="/explore/search" element={<Search />} />
       <Route path="/explore/recipe-detail/:id" element={<RecipeDetail />} />
       <Route path="/grocery-list" element={<GroceryList />} />
       <Route path="/preferences" element={<Preferences />} />

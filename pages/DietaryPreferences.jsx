@@ -1,45 +1,40 @@
-import { BreadcrumbItem, Breadcrumbs, Button, Card, CardBody, CardHeader, Checkbox, Select, SelectItem } from "@heroui/react";
-import React, { useState } from "react";
+import React from "react";
+import { Breadcrumbs, Button, Card, CardBody, Checkbox, Input, Select, SelectItem } from "@heroui/react";
 import { Link } from "react-router-dom";
 
 export default function DietaryPreferences() {
-    const [vegetarian, setVegetarian] = useState(false);
-    const [vegan, setVegan] = useState(false);
-    const [glutenFree, setGlutenFree] = useState(false);
-    const [dairyFree, setDairyFree] = useState(false);
-    const [allergy, setAllergy] = useState("");
+    const [diet, setDiet] = React.useState("balanced");
+    const [peanuts, setPeanuts] = React.useState(true);
+    const [gluten, setGluten] = React.useState(false);
+    const [dairy, setDairy] = React.useState(false);
+    const [soy, setSoy] = React.useState(false);
+    const [other, setOther] = React.useState("");
   return (
-   <div className="bg-[var(--color-background)] text-[var(--color-text)]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
-          <section className="w-full">
+   <div className="bg-[var(--color-background)] text-[var(--color-text)] min-h-screen">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
+          <section className="w-full flex flex-col gap-4">
       <Breadcrumbs className="text-[var(--color-text)]">
-      <BreadcrumbItem><Link to="/preferences" className="text-[var(--color-text)]">Preferences</Link></BreadcrumbItem>
-      <BreadcrumbItem>Dietary</BreadcrumbItem>
+      <Link to="/" className="text-[var(--color-text)]/80 hover:text-[var(--color-primary)]">Home</Link>
+      <Link to="/preferences" className="text-[var(--color-text)]/80 hover:text-[var(--color-primary)]">Preferences</Link>
+      <span className="text-[var(--color-text)]">Dietary</span>
       </Breadcrumbs>
-      </section>
-  <section className="w-full">
-      <Card className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl">
-      <CardHeader className="p-6"><h2 className="text-lg font-semibold text-[var(--color-text)]">Dietary restrictions</h2></CardHeader>
-      <CardBody className="p-6 space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <Checkbox isSelected={vegetarian} onValueChange={setVegetarian} className="text-[var(--color-text)]">Vegetarian</Checkbox>
-      <Checkbox isSelected={vegan} onValueChange={setVegan} className="text-[var(--color-text)]">Vegan</Checkbox>
-      <Checkbox isSelected={glutenFree} onValueChange={setGlutenFree} className="text-[var(--color-text)]">Gluten-free</Checkbox>
-      <Checkbox isSelected={dairyFree} onValueChange={setDairyFree} className="text-[var(--color-text)]">Dairy-free</Checkbox>
-      </div>
-      <Select
-      label="Allergies"
-      selectedKeys={allergy ? [allergy] : []}
-      onSelectionChange={(keys) => setAllergy(Array.from(keys)[0] || "")}
-      classNames={{ trigger: "h-11 bg-[var(--color-background)] border border-[var(--color-border)] rounded-xl", popoverContent: "bg-[var(--color-surface)] text-[var(--color-text)] rounded-xl", label: "text-[var(--color-text)]" }}
-      >
-      <SelectItem key="none">None</SelectItem>
-      <SelectItem key="peanuts">Peanuts</SelectItem>
-      <SelectItem key="shellfish">Shellfish</SelectItem>
-      <SelectItem key="soy">Soy</SelectItem>
+      <Card className="bg-[var(--color-surface)]/70 border border-[var(--color-border)] rounded-2xl">
+      <CardBody className="p-6 space-y-5">
+      <Select label="Diet" labelPlacement="outside-top" selectedKeys={diet ? [diet] : []} onSelectionChange={(keys) => setDiet(Array.from(keys)[0] || "")} classNames={{ trigger: "bg-[var(--color-background)] border border-[var(--color-border)] rounded-xl h-12", popoverContent: "bg-[var(--color-surface)] text-[var(--color-text)] rounded-xl", label: "text-[var(--color-text)]" }}>
+      {["balanced","keto","vegan","vegetarian","paleo"].map((opt) => (
+      <SelectItem key={opt} className="text-[var(--color-text)] capitalize">{opt}</SelectItem>
+      ))}
       </Select>
-      <div className="flex justify-end">
-      <Button className="rounded-xl bg-[var(--color-primary)] text-[var(--color-text)]">Save</Button>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <Checkbox isSelected={peanuts} onValueChange={setPeanuts} className="text-[var(--color-text)]">Peanuts</Checkbox>
+      <Checkbox isSelected={gluten} onValueChange={setGluten} className="text-[var(--color-text)]">Gluten</Checkbox>
+      <Checkbox isSelected={dairy} onValueChange={setDairy} className="text-[var(--color-text)]">Dairy</Checkbox>
+      <Checkbox isSelected={soy} onValueChange={setSoy} className="text-[var(--color-text)]">Soy</Checkbox>
+      </div>
+      <Input label="Other allergens" labelPlacement="outside-top" value={other} onValueChange={setOther} placeholder="Comma-separated" classNames={{ inputWrapper: "input-focus-primary bg-[var(--color-background)] border border-[var(--color-border)] rounded-xl", input: "text-[var(--color-text)] placeholder:text-[var(--color-text)]/60", label: "text-[var(--color-text)]" }} />
+      <div className="flex justify-end gap-3">
+      <Button variant="bordered" className="rounded-full border-[var(--color-border)] text-[var(--color-text)]">Cancel</Button>
+      <Button className="rounded-full bg-[var(--color-primary)] text-[var(--color-text)]">Save</Button>
       </div>
       </CardBody>
       </Card>

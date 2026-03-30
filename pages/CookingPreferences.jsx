@@ -1,48 +1,40 @@
-import { BreadcrumbItem, Breadcrumbs, Button, Card, CardBody, CardHeader, Checkbox, Radio, RadioGroup, Select, SelectItem } from "@heroui/react";
-import React, { useState } from "react";
+import React from "react";
+import { Breadcrumbs, Button, Card, CardBody, Checkbox, Input, Select, SelectItem, Switch } from "@heroui/react";
 import { Link } from "react-router-dom";
 
 export default function CookingPreferences() {
-    const [cuisine, setCuisine] = useState("");
-    const [batchCook, setBatchCook] = useState(true);
-    const [leftovers, setLeftovers] = useState(true);
+    const [skill, setSkill] = React.useState("beginner");
+    const [prep, setPrep] = React.useState("30");
+    const [onePot, setOnePot] = React.useState(true);
+    const [batch, setBatch] = React.useState(false);
+    const [airFryer, setAirFryer] = React.useState(false);
   return (
-   <div className="bg-[var(--color-background)] text-[var(--color-text)]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
-          <section className="w-full">
+   <div className="bg-[var(--color-background)] text-[var(--color-text)] min-h-screen">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
+          <section className="w-full flex flex-col gap-4">
       <Breadcrumbs className="text-[var(--color-text)]">
-      <BreadcrumbItem><Link to="/preferences" className="text-[var(--color-text)]">Preferences</Link></BreadcrumbItem>
-      <BreadcrumbItem>Cooking</BreadcrumbItem>
+      <Link to="/" className="text-[var(--color-text)]/80 hover:text-[var(--color-primary)]">Home</Link>
+      <Link to="/preferences" className="text-[var(--color-text)]/80 hover:text-[var(--color-primary)]">Preferences</Link>
+      <span className="text-[var(--color-text)]">Cooking</span>
       </Breadcrumbs>
-      </section>
-  <section className="w-full">
-      <Card className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl">
-      <CardHeader className="p-6"><h2 className="text-lg font-semibold text-[var(--color-text)]">Cooking preferences</h2></CardHeader>
-      <CardBody className="p-6 space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <Select
-      label="Primary cuisine"
-      selectedKeys={cuisine ? [cuisine] : []}
-      onSelectionChange={(keys) => setCuisine(Array.from(keys)[0] || "")}
-      classNames={{ trigger: "h-11 bg-[var(--color-background)] border border-[var(--color-border)] rounded-xl", popoverContent: "bg-[var(--color-surface)] text-[var(--color-text)] rounded-xl", label: "text-[var(--color-text)]" }}
-      >
-      <SelectItem key="any">Any</SelectItem>
-      <SelectItem key="italian">Italian</SelectItem>
-      <SelectItem key="thai">Thai</SelectItem>
-      <SelectItem key="mexican">Mexican</SelectItem>
+      <Card className="bg-[var(--color-surface)]/70 border border-[var(--color-border)] rounded-2xl">
+      <CardBody className="p-6 space-y-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <Select label="Skill level" labelPlacement="outside-top" selectedKeys={skill ? [skill] : []} onSelectionChange={(keys) => setSkill(Array.from(keys)[0] || "")} classNames={{ trigger: "bg-[var(--color-background)] border border-[var(--color-border)] rounded-xl h-12", popoverContent: "bg-[var(--color-surface)] text-[var(--color-text)] rounded-xl", label: "text-[var(--color-text)]" }}>
+      {["beginner","intermediate","advanced"].map((opt) => (
+      <SelectItem key={opt} className="text-[var(--color-text)] capitalize">{opt}</SelectItem>
+      ))}
       </Select>
-      <RadioGroup label={<span className="text-[var(--color-text)]">Spice tolerance</span>} orientation="horizontal">
-      <Radio value="mild" className="text-[var(--color-text)]">Mild</Radio>
-      <Radio value="medium" className="text-[var(--color-text)]">Medium</Radio>
-      <Radio value="hot" className="text-[var(--color-text)]">Hot</Radio>
-      </RadioGroup>
+      <Input label="Max prep time (min)" labelPlacement="outside-top" value={prep} onValueChange={setPrep} type="number" classNames={{ inputWrapper: "input-focus-primary bg-[var(--color-background)] border border-[var(--color-border)] rounded-xl", input: "text-[var(--color-text)] placeholder:text-[var(--color-text)]/60", label: "text-[var(--color-text)]" }} />
       </div>
-      <div className="flex flex-wrap gap-4">
-      <Checkbox isSelected={batchCook} onValueChange={setBatchCook} className="text-[var(--color-text)]">Batch cooking</Checkbox>
-      <Checkbox isSelected={leftovers} onValueChange={setLeftovers} className="text-[var(--color-text)]">Include leftovers</Checkbox>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <Checkbox isSelected={onePot} onValueChange={setOnePot} className="text-[var(--color-text)]">Prefer one-pot meals</Checkbox>
+      <Checkbox isSelected={batch} onValueChange={setBatch} className="text-[var(--color-text)]">Enable batch cooking</Checkbox>
       </div>
-      <div className="flex justify-end">
-      <Button className="rounded-xl bg-[var(--color-primary)] text-[var(--color-text)]">Save</Button>
+      <Switch isSelected={airFryer} onValueChange={setAirFryer} color="secondary" className="text-[var(--color-text)]">I have an air fryer</Switch>
+      <div className="flex justify-end gap-3">
+      <Button variant="bordered" className="rounded-full border-[var(--color-border)] text-[var(--color-text)]">Cancel</Button>
+      <Button className="rounded-full bg-[var(--color-primary)] text-[var(--color-text)]">Save</Button>
       </div>
       </CardBody>
       </Card>

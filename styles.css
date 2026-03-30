@@ -2,22 +2,22 @@
 /* Design tokens mapped to CSS variables for global theming */
 :root {
   /* Brand colors (dark mode default) */
-  --color-primary: #0F766E; /* teal */
-  --color-primary-light: #2DD4BF;
-  --color-secondary: #3730A3; /* indigo */
-  --color-secondary-light: #6366F1;
-  --color-accent: #9A3412; /* amber/burnt orange */
-  --color-accent-light: #F59E0B;
+  --color-primary: #0E7C86;
+  --color-primary-light: #12A9B0;
+  --color-secondary: #3F51B5;
+  --color-secondary-light: #5C6BC0;
+  --color-accent: #B4375E;
+  --color-accent-light: #D96C8C;
 
   /* Neutrals */
-  --color-background: #0B0F14; /* dark background */
-  --color-surface: #121826; /* elevated surfaces */
-  --color-text: #E5E7EB; /* light text for dark bg */
-  --color-border: #1F2937; /* subtle borders */
-  --color-ring: #8B95A1; /* neutral focus ring */
+  --color-background: #0B0F14; /* deep neutral for app background */
+  --color-surface: #151A22;     /* slightly lighter for cards/surfaces */
+  --color-text: #E6EAF0;        /* high-contrast text on dark */
+  --color-border: #1F2630;      /* subtle borders/dividers */
+  --color-ring: #9BA3AF;        /* focus ring/outline */
 
   /* Shadows */
-  --shadow-color: 15, 118, 110; /* rgb of primary */
+  --shadow-color: 14, 124, 134; /* RGB of primary (#0E7C86) */
 
   /* Gradients (generate from assigned brand colors) */
   --gradient-primary-accent: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
@@ -26,11 +26,11 @@
 
 /* Light theme overrides */
 :root[data-theme='light'] {
-  --color-background: #F7FAFC; /* light bg */
-  --color-surface: #FFFFFF; /* cards/surfaces */
-  --color-text: #374151; /* primary text on light */
-  --color-border: #E5E7EB; /* borders/dividers on light */
-  --color-ring: #8B95A1; /* neutral ring on light */
+  --color-background: #F5F7FA;  /* light background */
+  --color-surface: #FFFFFF;     /* cards/surfaces */
+  --color-text: #111827;        /* dark text for readability */
+  --color-border: #E6E8EC;      /* subtle light borders */
+  --color-ring: #4B5563;        /* darker ring for visibility */
 }
 
 /* Global element resets and base styles */
@@ -40,7 +40,7 @@ body,
   height: 100%;
 }
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji;
   background: var(--color-background);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
